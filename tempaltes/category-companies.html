@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Companies in Category{% endblock title %}
+
+{% block content%}
+<main class="container mt-3 mb-5">
+	<h3 class="border-bottom pb-1 my-4">{{category.title}}</h3>
+	<!-- Companies Box -->
+    {% for company in all_companies %}
+	<div class="card mb-4 shadow">
+	  <div class="row no-gutters">
+	    <div class="col-md-3">
+	      <img src="/media/{{company.image}}" class="card-img" alt="{{company.title}}">
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body">
+	        <h5 class="card-title">{{company.title}}</h5>
+	        <p class="card-text">{{company.salary}}</p>
+	        <p class="card-text">Address: {{company.address}}</p>
+	        <p class="card-text"><a href="{% url 'detail' company.pk  %}" class="btn btn-sm btn-primary">Read Full</a></p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{% endfor %}
+</main>
+{% endblock%}

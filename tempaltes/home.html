@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content%}
+<main class="container mt-3 mb-5">
+
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-7">
+			<div class="card mb-3">
+			  <img src="/media/{{first_companies.image}}" class="card-img-top" alt="{{first_companies.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{first_companies.title}}</h5>
+			    <hr/>
+			    <p class="card-text"><a href="all-companies/{{first_companies.id}}/detail" class="btn btn-sm btn-primary">Read Full</a></p>
+			  </div>
+			</div>
+		</div>
+		<!-- Right -->
+		<div class="col-md-5" style="max-height: 450px; overflow: auto;">
+		{% for companies in three_companies %}
+			<!-- News Box -->
+			<div class="card">
+			  <div class="row no-gutters">
+			    <div class="col-md-4">
+			       <img src="/media/{{companies.image}}" class="card-img-top" alt="{{companies.title}}">
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title">{{companies.title}}</h5>
+			        <p class="card-text"><a href="all-companies/{{companies.id}}/detail" class="btn btn-sm btn-primary">Read Full</a></p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<hr/>
+			{% endfor%}
+		</div>
+	</div>
+	<!-- Category Wise Companies -->
+	{% for category in three_categories %}
+	<h3 class="border-bottom pb-1"> {{category.title}} <a href="/category/{{category.id}}" 
+	class="float-right btn btn-sm btn-dark">In this Category</a></h3>
+	<div class="row my-4">
+		{% for companies in category.company_set.all %}
+		{% if forloop.counter < 5 %}
+
+		<div class="col-md-3">
+			<div class="card mb-3 shadow">
+		    	<img src="/media/{{companies.image}}" class="card-img-top" alt="{{companies.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{companies.title}}</h5>
+			    <hr/>
+			    <p class="card-text"><a href="all-companies/{{companies.id}}/detail" class="btn btn-sm btn-primary">Read Full</a></p>
+			  </div>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
+ {% endfor %}
+	<!-- End Single Category -->
+</main>
+{% endblock%}
